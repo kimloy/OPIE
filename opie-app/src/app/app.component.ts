@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'opie-app';
+  storedForm = []
+
+  onFormAdded(form) {
+    this.storedForm.push(form);
+  }
 }

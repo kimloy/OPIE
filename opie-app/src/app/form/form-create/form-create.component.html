@@ -1,5 +1,6 @@
 <mat-card>
   <mat-card-title>10 Meter Walk</mat-card-title>
+<!------------------------------------------------ Section #1: Patient information -------------------------------------------->
   <div class = "form">
     <form [formGroup]="patientForm" novalidate>
       <mat-card-content>
@@ -7,12 +8,12 @@
         <div class = "idDate">
 
           <mat-form-field>
-            <input matInput type = "text" placeholder = "Patient's ID" formControlName = "patientId" id="patientId">
+            <input matInput type = "text" placeholder = "Patient's ID" formControlName = "patientId" id="patientId" [(ngModel)]="patientId">
             <mat-error *ngIf = "hasError('patientId', 'required')">Patient's ID is required</mat-error>
           </mat-form-field>
 
           <mat-form-field>
-            <input matInput [matDatepicker]="picker" placeholder="Today's date" formControlName="dateOfVisit" id="dateOfVisit">
+            <input matInput [matDatepicker]="picker" placeholder="Today's date" formControlName="dateOfVisit" id="dateOfVisit" [(ngModel)]="date">
             <mat-datepicker-toggle matSuffix [for] ="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
@@ -22,12 +23,12 @@
         <div class = "PatientName">
 
           <mat-form-field class="full-width-field">
-            <input matInput type="text" placeholder = "Patient's First Name" formControlName = "patientFN" id = "patientFN">
+            <input matInput type="text" placeholder = "Patient's First Name" formControlName = "patientFN" id = "patientFN" [(ngModel)]="patientFirstName">
             <mat-error *ngIf = "hasError('patientFN', 'required')">Patient's First Name is Required</mat-error>
           </mat-form-field>
 
           <mat-form-field class="full-width-field">
-            <input matInput type ="text" placeholder ="Patient's Last Name" formControlName = "patientLN" id = "patientLN">
+            <input matInput type ="text" placeholder ="Patient's Last Name" formControlName = "patientLN" id = "patientLN" [(ngModel)]="patientLastName">
             <mat-error *ngIf = "hasError('patientLN', 'required')"></mat-error>
           </mat-form-field>
 
@@ -35,23 +36,25 @@
       </mat-card-content>
     </form>
   </div>
+<!-------------------------------------------------- Section # 1 (Patient Info) Ends ----------------------------------------------------------->
 
+<!-------------------------------------------------- Section #2 Patient Data ---------------------------------------------------->
   <div class = "table">
     <div class = table-child>
       <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-        <ng-container matColumnDef="task">
-          <th mat-header-cell *matHeaderCellDef>Task</th>
-          <td mat-cell *matCellDef="let element">{{element.task}}</td>
+        <ng-container matColumnDef="trail">
+          <th mat-header-cell *matHeaderCellDef>Trails</th>
+          <td mat-cell *matCellDef="let element">{{element.trail}}</td>
         </ng-container>
 
         <ng-container matColumnDef="speed">
           <th mat-header-cell *matHeaderCellDef>Speed</th>
-          <td mat-cell *matCellDef="let element">
+          <td mat-cell *matCellDef="let element; let i = index">
             <mat-form-field>
               <mat-label>Speed</mat-label>
               <mat-select>
-                <mat-option *ngFor = "let speed of speed" [value] = "speed.value">
+                <mat-option *ngFor = "let speed of speed" (onSelectionChange)="selected($event, i)" [value] = "speed.viewValue">
                   {{speed.viewValue}}
                 </mat-option>
               </mat-select>
@@ -73,6 +76,8 @@
       </table>
     </div>
   </div>
-
-
+<!--------------------------------------------------------- Section # 2 (Patient Data) Ends --------------------------------------------------------->
+  <button mat-raised-button color = "primary" (click) ="onSaveForm()" >Save</button>
 </mat-card>
+
+

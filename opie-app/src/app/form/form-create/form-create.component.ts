@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Location} from '@angular/common';
+import {MatOption, MatSelectChange} from '@angular/material';
 
 export interface PatientForm {
-  task: number;
+  trail: number;
 }
 
 export interface Speed {
@@ -12,7 +13,7 @@ export interface Speed {
 }
 
 const ELEMENT_DATA: PatientForm[] = [
-  {task: 1}, {task: 2}, {task: 3}
+  {trail: 1}, {trail: 2}, {trail: 3}
 ];
 
 @Component({
@@ -21,20 +22,50 @@ const ELEMENT_DATA: PatientForm[] = [
   styleUrls: ['./form-create.component.css']
 })
 export class FormCreateComponent implements OnInit {
+  patientId = '';
+  date = '';
+  patientFirstName = '';
+  patientLastName = '';
+  public patientSpeed: any = [];
+  public patientTime: any = [];
+  @Output() formCreated = new EventEmitter(); // Making a event emitter that will emit the data from this component to the list component
+
   public patientForm: FormGroup;
-  public patientTime: any = {};
   speed: Speed[] = [{value: 'comfortable-0', viewValue: 'Comfortable'},
                     {value: 'maximum-1', viewValue: 'Maximum'}];
-  displayedColumns: string [] = ['task', 'speed', 'time'];
+  displayedColumns: string [] = ['trail', 'speed', 'time'];
   dataSource = ELEMENT_DATA;
 
   ngOnInit(): void {
+
     this.patientForm = new FormGroup({
       patientId: new FormControl('', [Validators.required]),
       dateOfVisit: new FormControl('', [Validators.required]),
       patientFN: new FormControl('', [Validators.required]),
       patientLN: new FormControl('', [Validators.required])
     });
+  }
+
+  selected(value, i) {
+    this.patientSpeed[i] =  value.source.value
+    console.log(value.source.value);
+  }
+
+  onSaveForm() {
+      const form = {
+        patientId: this.patientId,
+        date: this.date,
+        patientFirstName: this.patientFirstName,
+        patientLastName: this.patientLastName,
+        patientSpeed1: this.patientSpeed[0],
+        patientSpeed2: this.patientSpeed[1],
+        patientSpeed3: this.patientSpeed[2],
+        patientTime1: this.patientTime[0],
+        patientTime2: this.patientTime[1],
+        patientTime3: this.patientTime[2],
+      };
+      console.log(form);
+      this.formCreated.emit(form);
   }
 
   public hasError = (controlId: string, errorId: string) => {

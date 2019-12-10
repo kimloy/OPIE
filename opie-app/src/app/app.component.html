@@ -1,2 +1,6 @@
 <app-header></app-header>
-<app-form-create></app-form-create>
+<main>
+  <app-form-create (formCreated)="(onFormAdded($event))"></app-form-create>
+  <app-form-list [patientData]="storedForm"></app-form-list>
+</main>
+

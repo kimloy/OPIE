@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { FormCreateComponent} from './form/form-create/form-create.component';
+import { FormListComponent } from './form/form-list/form-list.component';
 import { HeaderComponent} from './header/header.component';
 import {
   MatInputModule,
@@ -13,14 +14,16 @@ import {
   MatNativeDateModule,
   MatToolbarModule,
   MatTableModule,
-  MatSelectModule
+  MatSelectModule,
+  MatExpansionModule, MatButtonModule
 } from '@angular/material';
 
 @NgModule({
   declarations: [
     AppComponent,
     FormCreateComponent,
-    HeaderComponent
+    HeaderComponent,
+    FormListComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +36,9 @@ import {
     MatToolbarModule,
     MatTableModule,
     MatSelectModule,
-    FormsModule
+    FormsModule,
+    MatExpansionModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
