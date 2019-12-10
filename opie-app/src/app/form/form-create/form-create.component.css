@@ -1,25 +1,8 @@
-/*
-mat-card{
-  width: 80%;
-  margin: auto;
-}
-
-mat-form-field {
-  display: inline-block;
-}
-*/
-
-/*.example-container {
-  display: flex;
-  flex-direction: row;
-}
-
-.example-container > * {
-  width: 100%;
-}*/
 mat-card{
   width: 50%;
   margin: auto;
+  margin-top: 10%;
+  margin-bottom: 10%;
 }
 
 mat-card-title{
@@ -47,6 +30,34 @@ mat-form-field {
   text-align: center;
 }
 
-/*---------------------- style for the form container ends ----------------- */
 
+.table{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
 
+.table-child{
+  text-align: center;
+}
+
+.mat-column-task{
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  flex: 0 0 28% !important;
+  width: 28% !important;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  word-break: break-word;
+
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+th.mat-header-cell {
+  text-align: center !important;
+}

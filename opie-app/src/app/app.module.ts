@@ -3,14 +3,24 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { FormCreateComponent} from './form/form-create/form-create.component';
-import { MatInputModule, MatCardModule, MatDatepickerModule, MatNativeDateModule} from '@angular/material';
+import { HeaderComponent} from './header/header.component';
+import {
+  MatInputModule,
+  MatCardModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
+  MatToolbarModule,
+  MatTableModule,
+  MatSelectModule
+} from '@angular/material';
 
 @NgModule({
   declarations: [
     AppComponent,
-    FormCreateComponent
+    FormCreateComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -19,7 +29,11 @@ import { MatInputModule, MatCardModule, MatDatepickerModule, MatNativeDateModule
     MatInputModule,
     MatCardModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatToolbarModule,
+    MatTableModule,
+    MatSelectModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
