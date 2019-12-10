@@ -1,0 +1,52 @@
+/*
+mat-card{
+  width: 80%;
+  margin: auto;
+}
+
+mat-form-field {
+  display: inline-block;
+}
+*/
+
+/*.example-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.example-container > * {
+  width: 100%;
+}*/
+mat-card{
+  width: 50%;
+  margin: auto;
+}
+
+mat-card-title{
+  text-align: center;
+}
+
+mat-form-field {
+  margin: 25px;
+}
+
+/*--------------style for the form using div containers ----------------*/
+.form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+.IdDate {
+  text-align: center;
+  width: 25%;
+}
+
+.PatientName {
+  text-align: center;
+}
+
+/*---------------------- style for the form container ends ----------------- */
+
+
