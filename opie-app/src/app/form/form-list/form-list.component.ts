@@ -1,5 +1,7 @@
-import { Component, Input } from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import { Form } from '../form.model';
+import {FormService} from '../form.service';
+import { Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-form-list',
@@ -7,11 +9,19 @@ import { Form } from '../form.model';
   styleUrls: ['./form-list.component.css']
 })
 
-export class FormListComponent {
-  /*patientData = [{
-    title: 'Patient Data',
-    name: 'Paul',
-    time: '10'
-  }];*/
-  @Input () patientData: Form[] = []; // Input binds to the form created from the parent component form-created
+export class FormListComponent implements OnInit, OnDestroy {
+  patientData: Form[] = []; // Input binds to the form created from the parent component form-created
+  private formSub: Subscription;
+  constructor(public formService: FormService) {}
+
+  ngOnInit(): void {
+    this.patientData = this.formService.getForm();
+    this.formSub = this.formService.getFormUpdateListener().subscribe((forms) => {
+      this.patientData = forms;
+    });
+  }
+
+  ngOnDestroy() {
+    this.formSub.unsubscribe();
+  }
 }

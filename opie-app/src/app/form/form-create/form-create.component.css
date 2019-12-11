@@ -62,13 +62,13 @@ th.mat-header-cell {
 }
 
 .assistanceChild {
-  /*text-align: center;*/
-  margin-top: 5%;
+  text-align: center;
   margin-bottom: 5%;
+
 }
 
 #patientAssistance {
-  width: 100% !important;
+  width: 50% !important;
 
 }
 

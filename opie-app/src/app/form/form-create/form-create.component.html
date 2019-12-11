@@ -1,8 +1,9 @@
 <mat-card class="mat-elevation-z2">
   <mat-card-title>10 Meter Walk</mat-card-title>
 <!------------------------------------------------ Section #1: Patient information -------------------------------------------->
-  <div class = "form">
-    <form [formGroup]="patientForm" novalidate>
+
+  <form [formGroup]="patientForm" (submit) = "onSaveForm()">
+    <div class = "form">
       <mat-card-content>
 
         <div class = "idDate">
@@ -21,13 +22,13 @@
         <div class = "ageGender">
           <mat-form-field>
             <input matInput type ="text" placeholder = "Patient's Age" id ="patientAge" formControlName ="patientAge" [(ngModel)]="patientAge">
-            <mat-error *ngIf = "hasError('patientId', 'required')">Patient's ID is required</mat-error>
+            <mat-error *ngIf = "patientForm.get('patientAge').invalid">Patient's ID is required</mat-error>
           </mat-form-field>
 
           <mat-form-field>
             <mat-label>Gender</mat-label>
             <mat-select>
-              <mat-option *ngFor = "let gender of gender" (onSelectionChange)="selectedGender($event)" [value] = "gender.viewValue">
+              <mat-option *ngFor = "let gender of gender" (onSelectionChange)="selectedGender($event)" [value] = "gender.viewValue" >
                 {{gender.viewValue}}
               </mat-option>
             </mat-select>
@@ -37,89 +38,92 @@
         <div class = "PatientName">
           <mat-form-field class="full-width-field">
             <input matInput type="text" placeholder = "Patient's First Name" formControlName = "patientFN" id = "patientFN" [(ngModel)]="patientFirstName">
-            <mat-error *ngIf = "hasError('patientFN', 'required')">Patient's First Name is Required</mat-error>
+            <mat-error *ngIf = "patientForm.get('patientFN').invalid">Patient's First Name is Required</mat-error>
           </mat-form-field>
 
           <mat-form-field class="full-width-field">
             <input matInput type ="text" placeholder ="Patient's Last Name" formControlName = "patientLN" id = "patientLN" [(ngModel)]="patientLastName">
-            <mat-error *ngIf = "hasError('patientLN', 'required')"></mat-error>
+            <mat-error *ngIf = "patientForm.get('patientLN').invalid"></mat-error>
           </mat-form-field>
         </div>
       </mat-card-content>
-
-      <div class ="assistance">
-        <div class = "assistanceChild">
-          <mat-form-field id="patientAssistance">
-            <input matInput type = "text" placeholder = "Did the patient need assistance?" formControlName = "patientAssistance" [(ngModel)]="patientAssistance">
-            <mat-hint>Rate the greatest amount if assistance that was provided in the test (minimum, moderate, maximum) and what the patient was doing.</mat-hint>
-          </mat-form-field>
-        </div>
-      </div>
-
-    </form>
-  </div>
-<!-------------------------------------------------- Section # 1 (Patient Info) Ends ----------------------------------------------------------->
-
-<!-------------------------------------------------- Section #2 Patient Data ---------------------------------------------------->
-  <div class = "table">
-    <div class = table-child>
-      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-
-        <ng-container matColumnDef="trail">
-          <th mat-header-cell *matHeaderCellDef>Trails</th>
-          <td mat-cell *matCellDef="let element">{{element.trail}}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="speed">
-          <th mat-header-cell *matHeaderCellDef>Speed</th>
-          <td mat-cell *matCellDef="let element; let i = index">
-            <mat-form-field>
-              <mat-label>Speed</mat-label>
-              <mat-select>
-                <mat-option *ngFor = "let speed of speed" (onSelectionChange)="selected($event, i)" [value] = "speed.viewValue">
-                  {{speed.viewValue}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-          </td>
-        </ng-container>
-
-        <ng-container matColumnDef="time">
-          <th mat-header-cell *matHeaderCellDef>Time</th>
-          <td mat-cell *matCellDef="let element; let i=index">
-            <mat-form-field>
-              <input matInput [(ngModel)]="patientTime[i]" placeholder = "Input the patient's time">
-            </mat-form-field>
-          </td>
-        </ng-container>
-
-        <ng-container matColumnDef="assistiveDevices">
-          <th mat-header-cell *matHeaderCellDef>Patient's Assistive Device</th>
-          <td mat-cell *matCellDef="let element; let i=index">
-            <mat-form-field>
-              <input matInput [(ngModel)]="patientAssist[i]" placeholder="Input the assistive device">
-              <mat-hint>N/A for no device</mat-hint>
-            </mat-form-field>
-          </td>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>
     </div>
-  </div>
-<!--------------------------------------------------------- Section # 2 (Patient Data) Ends --------------------------------------------------------->
 
-<!---------------------------------------------------------- Section # 3 (Patient Assistance) Starts ------------------------------------------------->
+    <div class ="assistance">
+      <div class = "assistanceChild">
+        <mat-form-field id="patientAssistance">
+          <input matInput type = "text" placeholder = "Did the patient need assistance?" formControlName = "patientAssistance" [(ngModel)]="patientAssistance">
+          <mat-hint>Rate the greatest amount if assistance that was provided in the test (minimum, moderate, maximum) and what the patient was doing.</mat-hint>
+          <mat-error *ngIf = "patientForm.get('patientAssistance').invalid"></mat-error>
+        </mat-form-field>
+      </div>
+    </div>
 
 
-<!---------------------------------------------------------- Section # 4 (Button) -------------------------------------------------------------------->
-<div class = "formButton">
-  <div class = "button">
-    <button mat-raised-button color = "primary" (click) ="onSaveForm()" id = "saveForm">Save</button>
-  </div>
-</div>
-<!----------------------------------------------------------- Section # 4 (Button) Ends --------------------------------------------------------------->
+  <!-------------------------------------------------- Section # 1 (Patient Info) Ends ----------------------------------------------------------->
+
+  <!-------------------------------------------------- Section #2 Patient Data ---------------------------------------------------->
+    <div class = "table">
+      <div class = table-child>
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+          <ng-container matColumnDef="trail">
+            <th mat-header-cell *matHeaderCellDef>Trails</th>
+            <td mat-cell *matCellDef="let element">{{element.trail}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="speed">
+            <th mat-header-cell *matHeaderCellDef>Speed</th>
+            <td mat-cell *matCellDef="let element; let i = index">
+              <mat-form-field>
+                <mat-label>Speed</mat-label>
+                <mat-select>
+                  <mat-option *ngFor = "let speed of speed" (onSelectionChange)="selected($event, i)" [value] = "speed.viewValue">
+                    {{speed.viewValue}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="time">
+            <th mat-header-cell *matHeaderCellDef>Time</th>
+            <td mat-cell *matCellDef="let element; let i=index">
+              <mat-form-field>
+                <input matInput formControlName="patientTime" [(ngModel)]="patientTime[i]" placeholder = "Input the patient's time">
+              </mat-form-field>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="assistiveDevices">
+            <th mat-header-cell *matHeaderCellDef>Patient's Assistive Device</th>
+            <td mat-cell *matCellDef="let element; let i=index">
+              <mat-form-field>
+                <input matInput formControlName="patientAssist" [(ngModel)]="patientAssist[i]" placeholder="Input the assistive device">
+                <mat-hint>N/A for no device</mat-hint>
+              </mat-form-field>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+    </div>
+  <!--------------------------------------------------------- Section # 2 (Patient Data) Ends --------------------------------------------------------->
+
+  <!---------------------------------------------------------- Section # 3 (Patient Assistance) Starts ------------------------------------------------->
+
+
+    <!---------------------------------------------------------- Section # 4 (Button) -------------------------------------------------------------------->
+    <div class = "formButton">
+      <div class = "button">
+        <button mat-raised-button color = "primary" type = "submit" id = "saveForm">Save</button>
+      </div>
+    </div>
+    <!----------------------------------------------------------- Section # 4 (Button) Ends --------------------------------------------------------------->
+
+  </form>
 </mat-card>
 
 

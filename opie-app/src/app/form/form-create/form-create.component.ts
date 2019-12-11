@@ -1,8 +1,9 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {FormControl, FormGroup, FormGroupDirective, Validators} from '@angular/forms';
 import { Location} from '@angular/common';
 import {MatOption, MatSelectChange} from '@angular/material';
 import { Form } from '../form.model';
+import { FormService } from '../form.service';
 
 export interface PatientForm {
   trail: number;
@@ -28,6 +29,10 @@ const ELEMENT_DATA: PatientForm[] = [
   styleUrls: ['./form-create.component.css']
 })
 export class FormCreateComponent implements OnInit {
+  @ViewChild(FormGroupDirective, {static: false}) formGroupDirective: FormGroupDirective;
+
+  constructor(public formService: FormService) {}
+
   patientId = '';
   date = '';
   patientAge = '';
@@ -40,8 +45,7 @@ export class FormCreateComponent implements OnInit {
   public patientTime: any = [];
   public patientAssist: any = [];
   patientAssistance = '';
-  // tslint:disable-next-line:max-line-length
-  @Output() formCreated = new EventEmitter<Form>(); // Making a event emitter that will emit the data from this component to the list component
+
 
   public patientForm: FormGroup;
   speed: Speed[] = [{value: 'comfortable-0', viewValue: 'Comfortable'},
@@ -57,6 +61,8 @@ export class FormCreateComponent implements OnInit {
       patientFN: new FormControl('', [Validators.required]),
       patientLN: new FormControl('', [Validators.required]),
       patientAge: new FormControl('', [Validators.required]),
+      patientAssist: new FormControl('', [Validators.required]),
+      patientTime: new FormControl('', [Validators.required]),
       patientAssistance: new FormControl('', [Validators.required])
     });
   }
@@ -66,33 +72,21 @@ export class FormCreateComponent implements OnInit {
   }
 
   selected(value, i) {
-    this.patientSpeed[i] =  value.source.value
+    this.patientSpeed[i] =  value.source.value;
     console.log(value.source.value);
   }
 
   onSaveForm() {
-      const form: Form = {
-        patientId: this.patientId,
-        date: this.date,
-        patientGender: this.patientGender,
-        patientAge: this.patientAge,
-        patientFirstName: this.patientFirstName,
-        patientLastName: this.patientLastName,
-        patientSpeed1: this.patientSpeed[0],
-        patientSpeed2: this.patientSpeed[1],
-        patientSpeed3: this.patientSpeed[2],
-        patientTime1: this.patientTime[0],
-        patientTime2: this.patientTime[1],
-        patientTime3: this.patientTime[2],
-        patientAssist1: this.patientAssist[0],
-        patientAssist2: this.patientAssist[1],
-        patientAssist3: this.patientAssist[2],
-        patientAssistance: this.patientAssistance
-      };
-      this.formCreated.emit(form);
+    if (this.patientForm.invalid) {
+      return;
+    }
+    this.formService.addForm(this.patientId, this.date, this.patientAge, this.patientGender, this.patientFirstName, this.patientLastName,
+                            this.patientSpeed, this.patientTime, this.patientAssist, this.patientAssistance);
+    this.patientForm.reset();
+    this.formGroupDirective.resetForm();
   }
 
   public hasError = (controlId: string, errorId: string) => {
-    return this.patientForm.controls[controlId].hasError(errorId);
+    return this.patientForm.controls[controlId].invalid;
   }
 }

@@ -1,18 +1,18 @@
 export interface Form {
-  patientId: string;
-  date: string;
-  patientGender: string;
-  patientAge: string;
-  patientFirstName: string;
-  patientLastName: string;
-  patientSpeed1: string;
-  patientSpeed2: string;
-  patientSpeed3: string;
-  patientTime1: string;
-  patientTime2: string;
-  patientTime3: string;
-  patientAssist1: string;
-  patientAssist2: string;
-  patientAssist3: string;
-  patientAssistance: string;
+  id: string;
+  dv: string;
+  gender: string;
+  age: string;
+  FN: string;
+  LN: string;
+  speed1: string;
+  speed2: string;
+  speed3: string;
+  time1: string;
+  time2: string;
+  time3: string;
+  assistD1: string;
+  assistD2: string;
+  assistD3: string;
+  Assistance: string;
 }
