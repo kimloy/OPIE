@@ -5,6 +5,8 @@
     </mat-expansion-panel-header>
       <p>{{data.Id}}</p>
       <p>{{data.date}}</p>
+      <p>{{data.patientGender}}</p>
+      <p>{{data.patientAge}}</p>
       <p>{{data.patientFirstName}}</p>
       <p>{{data.patientLastName}}</p>
       <p>{{data.patientSpeed1}}</p>
@@ -13,6 +15,10 @@
       <p>{{data.patientTime1 }}</p>
       <p>{{data.patientTime2 }}</p>
       <p>{{data.patientTime3 }}</p>
+      <p>{{data.patientAssist1}}</p>
+      <p>{{data.patientAssist2}}</p>
+      <p>{{data.patientAssist3}}</p>
+
   </mat-expansion-panel>
 </mat-accordion>
 <p class = "info-text mat-body-2" *ngIf = "patientData.length <= 0">Waiting for Patient's Data</p>

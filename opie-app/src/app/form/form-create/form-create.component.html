@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card class="mat-elevation-z2">
   <mat-card-title>10 Meter Walk</mat-card-title>
 <!------------------------------------------------ Section #1: Patient information -------------------------------------------->
   <div class = "form">
@@ -20,6 +20,23 @@
 
         </div>
 
+        <div class = "ageGender">
+          <mat-form-field>
+            <input matInput type ="text" placeholder = "Patient's Age" id ="patientAge" formControlName ="patientAge" [(ngModel)]="patientAge">
+            <mat-error *ngIf = "hasError('patientId', 'required')">Patient's ID is required</mat-error>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Gender</mat-label>
+            <mat-select>
+              <mat-option *ngFor = "let gender of gender" (onSelectionChange)="selectedGender($event)" [value] = "gender.viewValue">
+                {{gender.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+        </div>
+
         <div class = "PatientName">
 
           <mat-form-field class="full-width-field">
@@ -33,6 +50,7 @@
           </mat-form-field>
 
         </div>
+
       </mat-card-content>
     </form>
   </div>
@@ -71,13 +89,30 @@
           </td>
         </ng-container>
 
+        <ng-container matColumnDef="assistiveDevices">
+          <th mat-header-cell *matHeaderCellDef>Patient's Assistive Device</th>
+          <td mat-cell *matCellDef="let element; let i=index">
+            <mat-form-field>
+              <input matInput [(ngModel)]="patientAssist[i]" placeholder="Input the assistive device">
+              <mat-hint>N/A for no device</mat-hint>
+            </mat-form-field>
+          </td>
+        </ng-container>
+
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
     </div>
   </div>
 <!--------------------------------------------------------- Section # 2 (Patient Data) Ends --------------------------------------------------------->
-  <button mat-raised-button color = "primary" (click) ="onSaveForm()" >Save</button>
+
+<!---------------------------------------------------------- Section # 3 (Button) -------------------------------------------------------------------->
+<div class = "formButton">
+  <div class = "button">
+    <button mat-raised-button color = "primary" (click) ="onSaveForm()" id = "saveForm">Save</button>
+  </div>
+</div>
+<!----------------------------------------------------------- Section # 3 (Button) Ends --------------------------------------------------------------->
 </mat-card>
 
 

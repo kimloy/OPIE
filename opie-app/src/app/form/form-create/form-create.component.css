@@ -24,6 +24,10 @@ mat-form-field {
   width: 25%;
 }
 
+.ageGender {
+  text-align: center;
+}
+
 .PatientName {
   text-align: center;
 }
@@ -43,4 +47,16 @@ mat-form-field {
 
 th.mat-header-cell {
   text-align: center !important;
+}
+
+.formButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+.button {
+  text-align: center;
+  margin-top: 5%;
 }
