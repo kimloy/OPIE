@@ -2,6 +2,7 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Location} from '@angular/common';
 import {MatOption, MatSelectChange} from '@angular/material';
+import { Form } from '../form.model';
 
 export interface PatientForm {
   trail: number;
@@ -38,7 +39,9 @@ export class FormCreateComponent implements OnInit {
   public patientSpeed: any = [];
   public patientTime: any = [];
   public patientAssist: any = [];
-  @Output() formCreated = new EventEmitter(); // Making a event emitter that will emit the data from this component to the list component
+  patientAssistance = '';
+  // tslint:disable-next-line:max-line-length
+  @Output() formCreated = new EventEmitter<Form>(); // Making a event emitter that will emit the data from this component to the list component
 
   public patientForm: FormGroup;
   speed: Speed[] = [{value: 'comfortable-0', viewValue: 'Comfortable'},
@@ -53,7 +56,8 @@ export class FormCreateComponent implements OnInit {
       dateOfVisit: new FormControl('', [Validators.required]),
       patientFN: new FormControl('', [Validators.required]),
       patientLN: new FormControl('', [Validators.required]),
-      patientAge: new FormControl('', [Validators.required])
+      patientAge: new FormControl('', [Validators.required]),
+      patientAssistance: new FormControl('', [Validators.required])
     });
   }
 
@@ -67,7 +71,7 @@ export class FormCreateComponent implements OnInit {
   }
 
   onSaveForm() {
-      const form = {
+      const form: Form = {
         patientId: this.patientId,
         date: this.date,
         patientGender: this.patientGender,
@@ -82,7 +86,8 @@ export class FormCreateComponent implements OnInit {
         patientTime3: this.patientTime[2],
         patientAssist1: this.patientAssist[0],
         patientAssist2: this.patientAssist[1],
-        patientAssist3: this.patientAssist[2]
+        patientAssist3: this.patientAssist[2],
+        patientAssistance: this.patientAssistance
       };
       this.formCreated.emit(form);
   }

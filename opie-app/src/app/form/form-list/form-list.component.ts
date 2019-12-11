@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Form } from '../form.model';
 
 @Component({
   selector: 'app-form-list',
@@ -12,5 +13,5 @@ export class FormListComponent {
     name: 'Paul',
     time: '10'
   }];*/
-  @Input () patientData = []; // Input binds to the form created from the parent component form-created
+  @Input () patientData: Form[] = []; // Input binds to the form created from the parent component form-created
 }

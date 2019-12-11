@@ -49,7 +49,7 @@ th.mat-header-cell {
   text-align: center !important;
 }
 
-.formButton {
+.formButton .assistance{
   display: flex;
   justify-content: center;
   align-items: center;
@@ -60,3 +60,15 @@ th.mat-header-cell {
   text-align: center;
   margin-top: 5%;
 }
+
+.assistanceChild {
+  /*text-align: center;*/
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+#patientAssistance {
+  width: 100% !important;
+
+}
+

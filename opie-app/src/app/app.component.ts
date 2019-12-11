@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Form } from './form/form.model';
 
 @Component({
   selector: 'app-root',
@@ -7,7 +8,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'opie-app';
-  storedForm = []
+  storedForm: Form[] = []
 
   onFormAdded(form) {
     this.storedForm.push(form);

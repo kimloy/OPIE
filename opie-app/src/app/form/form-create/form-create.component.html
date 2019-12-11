@@ -6,7 +6,6 @@
       <mat-card-content>
 
         <div class = "idDate">
-
           <mat-form-field>
             <input matInput type = "text" placeholder = "Patient's ID" formControlName = "patientId" id="patientId" [(ngModel)]="patientId">
             <mat-error *ngIf = "hasError('patientId', 'required')">Patient's ID is required</mat-error>
@@ -17,7 +16,6 @@
             <mat-datepicker-toggle matSuffix [for] ="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
-
         </div>
 
         <div class = "ageGender">
@@ -34,11 +32,9 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
-
         </div>
 
         <div class = "PatientName">
-
           <mat-form-field class="full-width-field">
             <input matInput type="text" placeholder = "Patient's First Name" formControlName = "patientFN" id = "patientFN" [(ngModel)]="patientFirstName">
             <mat-error *ngIf = "hasError('patientFN', 'required')">Patient's First Name is Required</mat-error>
@@ -48,10 +44,18 @@
             <input matInput type ="text" placeholder ="Patient's Last Name" formControlName = "patientLN" id = "patientLN" [(ngModel)]="patientLastName">
             <mat-error *ngIf = "hasError('patientLN', 'required')"></mat-error>
           </mat-form-field>
-
         </div>
-
       </mat-card-content>
+
+      <div class ="assistance">
+        <div class = "assistanceChild">
+          <mat-form-field id="patientAssistance">
+            <input matInput type = "text" placeholder = "Did the patient need assistance?" formControlName = "patientAssistance" [(ngModel)]="patientAssistance">
+            <mat-hint>Rate the greatest amount if assistance that was provided in the test (minimum, moderate, maximum) and what the patient was doing.</mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+
     </form>
   </div>
 <!-------------------------------------------------- Section # 1 (Patient Info) Ends ----------------------------------------------------------->
@@ -106,13 +110,16 @@
   </div>
 <!--------------------------------------------------------- Section # 2 (Patient Data) Ends --------------------------------------------------------->
 
-<!---------------------------------------------------------- Section # 3 (Button) -------------------------------------------------------------------->
+<!---------------------------------------------------------- Section # 3 (Patient Assistance) Starts ------------------------------------------------->
+
+
+<!---------------------------------------------------------- Section # 4 (Button) -------------------------------------------------------------------->
 <div class = "formButton">
   <div class = "button">
     <button mat-raised-button color = "primary" (click) ="onSaveForm()" id = "saveForm">Save</button>
   </div>
 </div>
-<!----------------------------------------------------------- Section # 3 (Button) Ends --------------------------------------------------------------->
+<!----------------------------------------------------------- Section # 4 (Button) Ends --------------------------------------------------------------->
 </mat-card>
 
 
