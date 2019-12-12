@@ -20,7 +20,10 @@
       <p>{{data.assistD2}}</p>
       <p>{{data.assistD3}}</p>
 
-
+  <mat-action-row>
+    <button mat-button color ="primary">EDIT</button>
+    <button mat-button color ="warn" (click)="onDelete(data.id)">DELETE</button>
+  </mat-action-row>
   </mat-expansion-panel>
 </mat-accordion>
 <p class = "info-text mat-body-2" *ngIf = "patientData.length <= 0">Waiting for Patient's Data</p>

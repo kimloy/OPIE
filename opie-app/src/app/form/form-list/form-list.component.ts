@@ -21,6 +21,10 @@ export class FormListComponent implements OnInit, OnDestroy {
     });
   }
 
+  onDelete(formId: string) {
+    this.formService.deleteForm(formId);
+  }
+
   ngOnDestroy() {
     this.formSub.unsubscribe();
   }

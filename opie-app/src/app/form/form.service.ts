@@ -3,6 +3,7 @@ import {Injectable} from '@angular/core';
 import { Subject } from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 
 @Injectable({providedIn: 'root'})
 export class FormService {
@@ -13,9 +14,32 @@ export class FormService {
   }
 
   getForms() {
-    this.http.get<{message: string, forms: Form[]}>('http://localhost:3000/api/forms')
-      .subscribe((formData) => {
-        this.forms = formData.forms;
+    this.http.get<{message: string, forms: any}>('http://localhost:3000/api/forms')
+      .pipe(map((formData) => {
+        return formData.forms.map(form => {
+          return {
+            id: form._id,
+            Pid: form.Pid,
+            dv: form.dv,
+            gender: form.gender,
+            age: form.age,
+            FN: form.FN,
+            LN: form.LN,
+            speed1: form.speed1,
+            speed2: form.speed2,
+            speed3: form.speed3,
+            time1: form.time1,
+            time2: form.time2,
+            time3: form.time3,
+            assistD1: form.assistD1,
+            assistD2: form.assistD2,
+            assistD3: form.assistD3,
+            Assistance: form.Assistance
+          };
+        });
+      }))
+      .subscribe((transformedForm) => {
+        this.forms = transformedForm;
         this.formUpdate.next([...this.forms]);
       });
   }
@@ -51,4 +75,11 @@ export class FormService {
       this.formUpdate.next([...this.forms]);
     });
   }
+
+ deleteForm(formId: string) {
+   this.http.delete('http://localhost:3000/api/forms/' + formId)
+     .subscribe(() => {
+       console.log('Deleted');
+     });
+ }
 }

@@ -55,49 +55,24 @@ app.post("/api/forms", (req,res,next) => {
 });
 
 app.get("/api/forms", (req, res, next) =>{
-  const forms = [{
-    patientId: '01',
-    date: '12/10/2019',
-    gender: 'Male',
-    age: '27',
-    FN: 'Paul',
-    LN: 'Chang Fatt',
-    speed1: "Max",
-    speed2: "Max",
-    speed3: "Max",
-    time1: "1",
-    time2: "1",
-    time3: "1",
-    assistD1: "no",
-    assistD2: "no",
-    assistD3: "no",
-    Assistance: "no"
-  }]
-  res.status(200).json({
-    message: 'Forms fetched successfully',
-    forms: forms
+  Form.find()
+    .then(documents => {
+      console.log(documents);
+
+      res.status(200).json({
+        message: 'Forms fetched successfully',
+        forms: documents
+      });
+    });
+});
+
+app.delete("/api/forms/:id", (req, res, next) =>{
+  Form.deleteOne({_id: req.params.id}).then(result => {
+    console.log(result);
+    res.status(200).json({message: "From deleted"});
   });
 });
 
 module.exports = app;
 
 
-/*
-const forms = new Form({
-  patientId: req.body.patientId,
-  date: req.body.dv,
-  gender: req.body.gender,
-  age: req.body.age,
-  FN: req.body.FN,
-  LN: req.body.LN,
-  speed1: req.body.speed1,
-  speed2: req.body.speed2,
-  speed3: req.body.speed3,
-  time1: req.body.time1,
-  time2: req.body.time2,
-  time3: req.body.time3,
-  assistD1: req.body.assistD1,
-  assistD2: req.body.assistD2,
-  assistD3: req.body.assistD3,
-  Assistance: req.body.Assistance
-});*/
