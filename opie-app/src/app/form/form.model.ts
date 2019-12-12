@@ -1,5 +1,6 @@
 export interface Form {
   id: string;
+  Pid: string;
   dv: string;
   gender: string;
   age: string;

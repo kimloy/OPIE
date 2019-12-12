@@ -1,11 +1,16 @@
 import { Form } from './form.model';
 import {Injectable} from '@angular/core';
 import { Subject } from 'rxjs';
+import {HttpClient} from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
 @Injectable({providedIn: 'root'})
 export class FormService {
   private forms: Form [] = [];
   private formUpdate = new Subject<Form[]>();
+
+  constructor(private http: HttpClient) {
+  }
 
   getForm() {
     return [...this.forms]; // Spread operator that gets the values of an array and create a new array with them
@@ -18,7 +23,8 @@ export class FormService {
   addForm(patientId, date, patientAge, patientGender, patientFirstName, patientLastName,
           patientSpeed, patientTime, patientAssist, patientAssistance) {
     const form: Form = {
-      id: patientId,
+      id: null,
+      Pid: patientId,
       dv: date,
       age: patientAge,
       gender: patientGender,
