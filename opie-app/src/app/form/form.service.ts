@@ -69,8 +69,9 @@ export class FormService {
       assistD3: patientAssist[2],
       Assistance: patientAssistance
     };
-    this.http.post<{message: string}>('http://localhost:3000/api/forms', form).subscribe((responseData) => {
-      console.log(responseData.message);
+    this.http.post<{message: string, formId: string}>('http://localhost:3000/api/forms', form).subscribe((responseData) => {
+      const id = responseData.formId;
+      form.id = id;
       this.forms.push(form);
       this.formUpdate.next([...this.forms]);
     });
@@ -79,7 +80,9 @@ export class FormService {
  deleteForm(formId: string) {
    this.http.delete('http://localhost:3000/api/forms/' + formId)
      .subscribe(() => {
-       console.log('Deleted');
+       const updatedForm = this.forms.filter(form => form.id !== formId);
+       this.forms = updatedForm;
+       this.formUpdate.next([...this.forms]);
      });
  }
 }

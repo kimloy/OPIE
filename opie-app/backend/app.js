@@ -47,10 +47,13 @@ app.post("/api/forms", (req,res,next) => {
     assistD3: req.body.assistD3,
     Assistance: req.body.Assistance
   });
-  form.save();
-  res.status(201).json({
-    message: 'form added successfully'
+  form.save().then(result => {
+    res.status(201).json({
+      message: 'form added successfully',
+      formId: result._id
+    });
   });
+
 
 });
 
