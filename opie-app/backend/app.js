@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const Form = require('./models/form');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false})); // this will parse url encoded data. We do not need it.
@@ -28,8 +29,25 @@ app.use((req, res, next) => {
 });
 
 app.post("/api/forms", (req,res,next) => {
-  const form = req.body;
-  console.log(form);
+  const form = new Form({
+    Pid: req.body.Pid,
+    dv: req.body.dv,
+    gender: req.body.gender,
+    age: req.body.age,
+    FN: req.body.FN,
+    LN: req.body.LN,
+    speed1: req.body.speed1,
+    speed2: req.body.speed2,
+    speed3: req.body.speed3,
+    time1: req.body.time1,
+    time2: req.body.time2,
+    time3: req.body.time3,
+    assistD1: req.body.assistD1,
+    assistD2: req.body.assistD2,
+    assistD3: req.body.assistD3,
+    Assistance: req.body.Assistance
+  });
+  form.save();
   res.status(201).json({
     message: 'form added successfully'
   });
