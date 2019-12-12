@@ -12,8 +12,12 @@ export class FormService {
   constructor(private http: HttpClient) {
   }
 
-  getForm() {
-    return [...this.forms]; // Spread operator that gets the values of an array and create a new array with them
+  getForms() {
+    this.http.get<{message: string, forms: Form[]}>('http://localhost:3000/api/forms')
+      .subscribe((formData) => {
+        this.forms = formData.forms;
+        this.formUpdate.next([...this.forms]);
+      });
   }
 
   getFormUpdateListener() {
@@ -41,7 +45,10 @@ export class FormService {
       assistD3: patientAssist[2],
       Assistance: patientAssistance
     };
-    this.forms.push(form);
-    this.formUpdate.next([...this.forms]);
+    this.http.post<{message: string}>('http://localhost:3000/api/forms', form).subscribe((responseData) => {
+      console.log(responseData.message);
+      this.forms.push(form);
+      this.formUpdate.next([...this.forms]);
+    });
   }
 }

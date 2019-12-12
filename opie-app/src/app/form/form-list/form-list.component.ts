@@ -15,7 +15,7 @@ export class FormListComponent implements OnInit, OnDestroy {
   constructor(public formService: FormService) {}
 
   ngOnInit(): void {
-    this.patientData = this.formService.getForm();
+    this.formService.getForms();
     this.formSub = this.formService.getFormUpdateListener().subscribe((forms) => {
       this.patientData = forms;
     });
