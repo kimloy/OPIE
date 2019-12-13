@@ -7,3 +7,31 @@
 .info-text{
   text-align: center;
 }
+
+mat-form-field {
+  margin: 25px;
+}
+
+.spacer {
+  display: flex;
+  flex-direction: row;
+}
+
+.searchSection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+.searchChild{
+  text-align: center;
+}
+
+#patientId{
+  width: 10% !important;
+}
+
+.or{
+  display: flex;
+}

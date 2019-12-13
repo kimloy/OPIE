@@ -19,6 +19,8 @@ import {
   MatExpansionModule,
   MatButtonModule
 } from '@angular/material';
+import {AppRoutingModule} from './app-routing.module';
+import {MatIconModule} from "@angular/material/icon";
 
 
 @NgModule({
@@ -28,22 +30,24 @@ import {
     HeaderComponent,
     FormListComponent
   ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    ReactiveFormsModule,
-    MatInputModule,
-    MatCardModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatToolbarModule,
-    MatTableModule,
-    MatSelectModule,
-    FormsModule,
-    MatExpansionModule,
-    MatButtonModule,
-    HttpClientModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        ReactiveFormsModule,
+        MatInputModule,
+        MatCardModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatToolbarModule,
+        MatTableModule,
+        MatSelectModule,
+        FormsModule,
+        MatExpansionModule,
+        MatButtonModule,
+        HttpClientModule,
+        MatIconModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

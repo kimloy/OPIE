@@ -1,5 +1,31 @@
-<mat-accordion multi ="true" *ngIf = "patientData.length > 0">
-  <mat-expansion-panel *ngFor="let data of patientData" >
+<div class = "searchSection">
+  <div class = "searchChild">
+    <mat-form-field appearance="outline" id = "patientId">
+      <mat-label>Patient's ID</mat-label>
+      <input matInput placeholder="Input Patient's ID number" [(ngModel)]="patentId">
+      <mat-hint></mat-hint>
+      </mat-form-field>
+
+      <label>OR</label>
+
+    <mat-form-field appearance="outline" id = "patientFN">
+      <mat-label>Patient's First Name</mat-label>
+      <input matInput placeholder="Input Patient's First Name" [(ngModel)]="patientFN">
+      <mat-hint></mat-hint>
+     </mat-form-field>
+
+      <mat-form-field appearance="outline" id = "patientLN">
+        <mat-label>Patient's Last Name</mat-label>
+        <input matInput placeholder="Input Patient's Last Name" [(ngModel)]="patientLN">
+        <mat-hint></mat-hint>
+      </mat-form-field>
+
+    <button mat-raised-button color="primary" (click)="onSearch()">Search </button>
+  </div>
+</div>
+
+<mat-accordion multi ="true" *ngIf = "SearchField.length > 0">
+  <mat-expansion-panel *ngFor="let data of SearchField" >
     <mat-expansion-panel-header>
       <p>Patient Data</p>
     </mat-expansion-panel-header>
@@ -9,7 +35,7 @@
       <p>{{data.age}}</p>
       <p>{{data.FN}}</p>
       <p>{{data.LN}}</p>
-    <p>{{data.Assistance}}</p>
+      <p>{{data.Assistance}}</p>
       <p>{{data.speed1}}</p>
       <p>{{data.speed2}}</p>
       <p>{{data.speed3}}</p>
@@ -20,10 +46,10 @@
       <p>{{data.assistD2}}</p>
       <p>{{data.assistD3}}</p>
 
-  <mat-action-row>
-    <button mat-button color ="primary">EDIT</button>
-    <button mat-button color ="warn" (click)="onDelete(data.id)">DELETE</button>
-  </mat-action-row>
+    <mat-action-row>
+      <button mat-button color ="primary">EDIT</button>
+      <button mat-button color ="warn" (click)="onDelete(data.id)">DELETE</button>
+    </mat-action-row>
   </mat-expansion-panel>
 </mat-accordion>
-<p class = "info-text mat-body-2" *ngIf = "patientData.length <= 0">Waiting for Patient's Data</p>
+<p class = "info-text mat-body-2" *ngIf = "SearchField.length <= 0">Waiting for Patient's Data</p>
