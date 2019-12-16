@@ -16,7 +16,7 @@ const formSchema =  mongoose.Schema({
   assistD1: {type: String, required: true},
   assistD2: {type: String, required: true},
   assistD3: {type: String, required: true},
-  Assistance: {type: String, required: true},
+  Assistance: {type: String, required: true}
 });
 
 module.exports = mongoose.model('Form', formSchema);

@@ -4,6 +4,7 @@ import { Location} from '@angular/common';
 import {MatOption, MatSelectChange} from '@angular/material';
 import { Form } from '../form.model';
 import { FormService } from '../form.service';
+import {MatDatepickerInput, MatDatepickerInputEvent} from '@angular/material/datepicker';
 
 export interface PatientForm {
   trail: number;
@@ -45,6 +46,7 @@ export class FormCreateComponent implements OnInit {
   public patientTime: any = [];
   public patientAssist: any = [];
   patientAssistance = '';
+  gaitSpeed = 0;
 
 
   public patientForm: FormGroup;
@@ -80,10 +82,17 @@ export class FormCreateComponent implements OnInit {
     if (this.patientForm.invalid) {
       return;
     }
+
     this.formService.addForm(this.patientId, this.date, this.patientAge, this.patientGender, this.patientFirstName, this.patientLastName,
                             this.patientSpeed, this.patientTime, this.patientAssist, this.patientAssistance);
     this.patientForm.reset();
     this.formGroupDirective.resetForm();
+  }
+
+  onSaveDate(event: MatDatepickerInputEvent<Date>) {
+    const d = `${event.value}`;
+    console.log(d);
+    this.date = d;
   }
 
   public hasError = (controlId: string, errorId: string) => {

@@ -1,8 +1,4 @@
-:host{
-  display: block;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-}
+
 
 .info-text{
   text-align: center;
@@ -29,9 +25,32 @@ mat-form-field {
 }
 
 #patientId{
-  width: 10% !important;
+  width: 15% !important;
 }
 
 .or{
   display: flex;
 }
+
+.table{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+.table-child {
+  text-align: center;
+}
+
+table {
+  width: 100%;
+  table-layout: fixed;
+  margin-bottom: 5%;
+}
+
+.gait{
+  text-align: center;
+}
+
+

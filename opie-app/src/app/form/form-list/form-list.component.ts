@@ -17,36 +17,49 @@ export class FormListComponent implements OnInit, OnDestroy {
   patentId = '';
   patientFN = '';
   patientLN = '';
+  gaitSpeed = [];
   constructor(public formService: FormService) {}
 
   ngOnInit(): void {
     this.formService.getForms();
     this.formSub = this.formService.getFormUpdateListener().subscribe((forms) => {
       this.patientData = forms;
+      this.onSearch();
     });
   }
 
   onSearch() {
+    console.log(this.SearchField);
+    console.log(this.patientData);
+    this.SearchField = [];
     if (this.patentId !== '') {
       for (let i = 0; i < (this.patientData.length); i++) {
         // tslint:disable-next-line:triple-equals
         if (this.patientData[i].Pid == this.patentId) {
-          this.SearchField[i] = this.patientData[i];
+          this.SearchField.push(this.patientData[i]);
         }
       }
+
+      for (let i = 0; i < (this.SearchField.length); i++) {
+        const time1 = parseFloat(this.SearchField[i].time1);
+        const time2 = parseFloat(this.SearchField[i].time2);
+        const time3 = parseFloat(this.SearchField[i].time3);
+        const average = (time1 + time2 + time3) / 3;
+        this.gaitSpeed[i] = {};
+        this.gaitSpeed[i].gS = Number((6 / average).toFixed(3));
+      }
       this.patentId = '';
-    }
-    else if (this.patientFN !== '' && this.patientLN) {
-      for (let i = 0; i < (this.patientData.length); i++)
-      {
-        if ((this.patientData[i].FN === this.patientFN) && (this.patientData[i].LN === this.patientLN))
-        {
+    } else if (this.patientFN !== '' && this.patientLN) {
+      for (let i = 0; i < (this.patientData.length); i++) {
+        if ((this.patientData[i].FN === this.patientFN) && (this.patientData[i].LN === this.patientLN)) {
           this.SearchField[i] = this.patientData[i];
         }
       }
       this.patientLN = '';
       this.patientFN = '';
     }
+    console.log(this.SearchField);
+    console.log(this.gaitSpeed);
   }
 
   onDelete(formId: string) {

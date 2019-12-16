@@ -25,26 +25,66 @@
 </div>
 
 <mat-accordion multi ="true" *ngIf = "SearchField.length > 0">
-  <mat-expansion-panel *ngFor="let data of SearchField" >
+  <mat-expansion-panel *ngFor="let data of SearchField; let i = index; ">
     <mat-expansion-panel-header>
-      <p>Patient Data</p>
-    </mat-expansion-panel-header>
-      <p>{{data.Pid}}</p>
       <p>{{data.dv}}</p>
-      <p>{{data.gender}}</p>
-      <p>{{data.age}}</p>
-      <p>{{data.FN}}</p>
-      <p>{{data.LN}}</p>
-      <p>{{data.Assistance}}</p>
-      <p>{{data.speed1}}</p>
-      <p>{{data.speed2}}</p>
-      <p>{{data.speed3}}</p>
-      <p>{{data.time1 }}</p>
-      <p>{{data.time2 }}</p>
-      <p>{{data.time3 }}</p>
-      <p>{{data.assistD1}}</p>
-      <p>{{data.assistD2}}</p>
-      <p>{{data.assistD3}}</p>
+    </mat-expansion-panel-header>
+
+    <div class = "table">
+      <div class = "table-child">
+        <table >
+            <tr>
+              <th>Patient's Id</th>
+              <th>Patient's Gender</th>
+              <th>Patient's Age</th>
+              <th>Patient's First Name</th>
+              <th>Patient's Last Name</th>
+            </tr>
+
+            <tr>
+              <td>{{data.Pid}}</td>
+              <td>{{data.gender}}</td>
+              <td>{{data.age}}</td>
+              <td>{{data.FN}}</td>
+              <td>{{data.LN}}</td>
+            </tr>
+        </table>
+
+        <table>
+          <tr>
+            <th>Trails</th>
+            <th>Patient's Speed</th>
+            <th>Patient's Time</th>
+            <th>Assistive Device</th>
+          </tr>
+
+          <tr>
+            <th>1</th>
+            <td>{{data.speed1}}</td>
+            <td>{{data.time1}}</td>
+            <td>{{data.assistD1}}</td>
+          </tr>
+
+          <tr>
+            <th>2</th>
+            <td>{{data.speed2}}</td>
+            <td>{{data.time2}}</td>
+            <td>{{data.assistD2}}</td>
+          </tr>
+
+          <tr>
+            <th>3</th>
+            <td>{{data.speed3}}</td>
+            <td>{{data.time3}}</td>
+            <td>{{data.assistD3}}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <div class = "gait">
+      <h4>Gait Speed: {{gaitSpeed[i].gS}} (m/s)</h4>
+    </div>
 
     <mat-action-row>
       <button mat-button color ="primary">EDIT</button>

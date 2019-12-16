@@ -8,6 +8,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { FormCreateComponent} from './form/form-create/form-create.component';
 import { FormListComponent } from './form/form-list/form-list.component';
 import { HeaderComponent} from './header/header.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
 import {
   MatInputModule,
   MatCardModule,
@@ -20,7 +22,7 @@ import {
   MatButtonModule
 } from '@angular/material';
 import {AppRoutingModule} from './app-routing.module';
-import {MatIconModule} from "@angular/material/icon";
+import {MatIconModule} from '@angular/material/icon';
 
 
 @NgModule({
@@ -46,7 +48,8 @@ import {MatIconModule} from "@angular/material/icon";
         MatExpansionModule,
         MatButtonModule,
         HttpClientModule,
-        MatIconModule
+        MatIconModule,
+        NgbModule
     ],
   providers: [],
   bootstrap: [AppComponent]
