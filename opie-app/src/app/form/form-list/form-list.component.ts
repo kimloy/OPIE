@@ -39,24 +39,26 @@ export class FormListComponent implements OnInit, OnDestroy {
           this.SearchField.push(this.patientData[i]);
         }
       }
-
-      for (let i = 0; i < (this.SearchField.length); i++) {
-        const time1 = parseFloat(this.SearchField[i].time1);
-        const time2 = parseFloat(this.SearchField[i].time2);
-        const time3 = parseFloat(this.SearchField[i].time3);
-        const average = (time1 + time2 + time3) / 3;
-        this.gaitSpeed[i] = {};
-        this.gaitSpeed[i].gS = Number((6 / average).toFixed(3));
-      }
       this.patentId = '';
     } else if (this.patientFN !== '' && this.patientLN) {
       for (let i = 0; i < (this.patientData.length); i++) {
-        if ((this.patientData[i].FN === this.patientFN) && (this.patientData[i].LN === this.patientLN)) {
-          this.SearchField[i] = this.patientData[i];
+        // tslint:disable-next-line:max-line-length
+        if ((this.patientData[i].FN.toLowerCase() === this.patientFN.toLowerCase())
+          && (this.patientData[i].LN.toLowerCase() === this.patientLN.toLowerCase())) {
+          this.SearchField.push(this.patientData[i]);
         }
       }
       this.patientLN = '';
       this.patientFN = '';
+    }
+
+    for (let i = 0; i < (this.SearchField.length); i++) {
+      const time1 = parseFloat(this.SearchField[i].time1);
+      const time2 = parseFloat(this.SearchField[i].time2);
+      const time3 = parseFloat(this.SearchField[i].time3);
+      const average = (time1 + time2 + time3) / 3;
+      this.gaitSpeed[i] = {};
+      this.gaitSpeed[i].gS = Number((6 / average).toFixed(3));
     }
     console.log(this.SearchField);
     console.log(this.gaitSpeed);
